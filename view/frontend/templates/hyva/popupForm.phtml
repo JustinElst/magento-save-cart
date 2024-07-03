@@ -1,6 +1,13 @@
-<?php /** @var $block \Maisondunet\SaveQuote\ViewModel\CurrentCart */?>
+<?php
+use Magento\Framework\Escaper;
+use Maisondunet\SaveQuote\ViewModel\CurrentCart;
 
-<form  method="post" action="/mdnsavecart/customer/save" class="form form-cart w-full float-left flex flex-col">
+/**
+ * @var $block CurrentCart
+ * @var $escaper Escaper
+ */
+?>
+<form  method="post" action="<?= $escaper->escapeUrl($block->getUrl('mdnsavecart/customer/save'))?>" class="form form-cart w-full float-left flex flex-col">
     <span><?= __("Name") ?></span>
     <input class="input-text" type="text" name="name" required>
     <span><?= __("Description") ?></span>

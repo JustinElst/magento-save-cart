@@ -15,7 +15,7 @@ use Magento\Customer\Model\Url;
         <?= __("Save Your Cart") ?>
     </button>
 <?php else: ?>
-    <a class="button" href="<?= $block->getUrl("customer/account/login", [Url::REFERER_QUERY_PARAM_NAME => base64_encode($block->getUrl("checkout/cart"))]) ?>">
+    <a class="button" href="<?= $escaper->escapeUrl($block->getUrl("customer/account/login", [Url::REFERER_QUERY_PARAM_NAME => base64_encode($block->getUrl("checkout/cart"))])) ?>">
         <?= __("Save Your Cart") ?>
     </a>
 

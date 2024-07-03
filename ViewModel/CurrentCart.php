@@ -6,17 +6,22 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Framework\View\Element\Template;
 use Magento\Quote\Model\Quote;
 
-class CurrentCart implements ArgumentInterface
+class CurrentCart extends Template implements ArgumentInterface
 {
-    private ?Quote $quote;
+    private ?Quote  $quote;
     private Session $session;
 
     public function __construct(
-        Session $session
-    ) {
+        Session $session,
+        Template\Context $context,
+        array $data = []
+    )
+    {
         $this->session = $session;
+        parent::__construct($context, $data);
     }
 
     protected function getQuote(): ?Quote
@@ -24,10 +29,12 @@ class CurrentCart implements ArgumentInterface
         if (!isset($this->quote)) {
             try {
                 $this->quote = $this->session->getQuote();
-            } catch (NoSuchEntityException|LocalizedException $e) {
+            }
+            catch (NoSuchEntityException|LocalizedException $e) {
                 $this->quote = null;
             }
         }
+
         return $this->quote;
     }
 
@@ -36,7 +43,8 @@ class CurrentCart implements ArgumentInterface
         $quote = $this->getQuote();
         if ($quote !== null) {
             return $quote->getId();
-        } else {
+        }
+        else {
             return null;
         }
     }

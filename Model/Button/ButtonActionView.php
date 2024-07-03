@@ -8,16 +8,10 @@ use Maisondunet\SaveQuote\Api\Data\QuoteDescriptionInterface;
 
 class ButtonActionView implements \Maisondunet\SaveQuote\Api\Button\ButtonActionInterface
 {
-    private Url $url;
-    private PostHelper $postHelper;
-
     public function __construct(
-        Url $url,
-        PostHelper $postHelper
-    ) {
-        $this->url = $url;
-        $this->postHelper = $postHelper;
-    }
+        protected PostHelper $postHelper,
+        protected Url $url
+    ){}
 
     public function createAction(QuoteDescriptionInterface $quoteDescription): string
     {

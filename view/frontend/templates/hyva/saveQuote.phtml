@@ -37,7 +37,7 @@ $modal = $modalViewModel->createModal()->withBlockName("mdn.savequote.block.popu
         <?= __("Save Your Cart") ?>
     </button>
     <a x-show="!isLoggedIn" class="btn btn-primary rounded inline-block"
-       href="<?= $block->getUrl("customer/account/login", [Url::REFERER_QUERY_PARAM_NAME => base64_encode($block->getUrl("checkout/cart"))]) ?>"
+       href="<?= $escaper->escapeUrl($block->getUrl("customer/account/login", [Url::REFERER_QUERY_PARAM_NAME => base64_encode($block->getUrl("checkout/cart"))])) ?>"
       @click.prevent.stop="onClick()"
     >
         <?= __("Save Your Cart") ?>
